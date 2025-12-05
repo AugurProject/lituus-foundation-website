@@ -1,0 +1,96 @@
+---
+// Animated golden ratio grid overlay with dripping borders
+---
+
+<style>
+  /* Dripping Border Animations */
+  .border-drip-gradient {
+    position: relative;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(251, 172, 204, 0.3) 30%,
+      rgba(251, 172, 204, 0.1) 60%,
+      transparent 100%
+    );
+    animation: drip-flow 4s ease-in-out infinite;
+    will-change: opacity;
+  }
+
+  @keyframes drip-flow {
+    0%, 100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  .border-drip-pulse {
+    position: relative;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(251, 172, 204, 0.3) 20%,
+      rgba(251, 172, 204, 0.2) 40%,
+      rgba(251, 172, 204, 0.05) 70%,
+      transparent 100%
+    );
+    animation: drip-pulse 10s ease-in-out infinite;
+    will-change: opacity;
+  }
+
+  @keyframes drip-pulse {
+    0%, 100% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .border-drip-cascade {
+    position: relative;
+    background: linear-gradient(
+      180deg,
+      transparent 10%,
+      rgba(251, 172, 204, 0.2) 30%,
+      rgba(251, 172, 204, 0.1) 40%,
+      transparent 50%
+    );
+    animation: drip-cascade 20s ease-out infinite;
+    will-change: opacity;
+  }
+
+  @keyframes drip-cascade {
+    0% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 0.3;
+    }
+  }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    .border-drip-gradient,
+    .border-drip-pulse,
+    .border-drip-cascade {
+      animation: none;
+    }
+  }
+</style>
+
+<div class="fixed inset-0 z-0 pointer-events-none">
+  <div class="w-full lg:max-w-344 mx-auto grid grid-cols-12 h-screen relative">
+    <!-- Left border with drip effect -->
+    <div class="absolute left-0 top-0 bottom-0 w-px border-drip-gradient"></div>
+    <!-- Right border with drip effect -->
+    <div class="absolute col-start-9 delay-200 top-0 bottom-0 w-px border-drip-pulse"></div>
+    <!-- Center divider with drip effect -->
+    <div class="absolute col-start-13 inset-0 w-px border-drip-cascade"></div>
+  </div>
+</div>

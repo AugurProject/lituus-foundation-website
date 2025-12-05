@@ -1,0 +1,55 @@
+---
+// Animated cloud layers with GPU-accelerated infinite scroll
+---
+
+<style>
+  /* Cloud/Fog drift animation - GPU accelerated with transform */
+  @keyframes fog-drift {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100vw);
+    }
+  }
+
+  .fog-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200vw;
+    background-repeat: repeat-x;
+    background-size: 100vw 100%; /* Each tile = viewport width */
+    mix-blend-mode: overlay;
+    will-change: transform;
+    transform: translateZ(0);
+    opacity: 0.3;
+  }
+
+  .animate-fog-slow {
+    animation: fog-drift 90s linear infinite;
+  }
+
+  .animate-fog-medium {
+    animation: fog-drift 40s linear infinite;
+  }
+
+  .animate-fog-fast {
+    animation: fog-drift 30s linear infinite;
+  }
+
+  .fog-layer-medium,
+  .fog-layer-fast {
+    opacity: 0.4;
+  }
+</style>
+
+<div class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
+  <!-- Cloud Layer 1 - Slow -->
+  <div class="fog-layer animate-fog-slow" style="background-image: url('/images/cloud-1.jpg');"></div>
+  <!-- Cloud Layer 2 - Fast -->
+  <div class="fog-layer fog-layer-fast animate-fog-fast" style="background-image: url('/images/cloud-2.jpg');"></div>
+  <!-- Cloud Layer 3 - Medium -->
+  <div class="fog-layer fog-layer-medium animate-fog-medium" style="background-image: url('/images/cloud-1.jpg');"></div>
+</div>

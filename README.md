@@ -1,43 +1,126 @@
-# Astro Starter Kit: Minimal
+# Lituus Foundation Website
 
-```sh
-npm create astro@latest -- --template minimal
+The official website for Lituus Foundation — Guardians of Decentralized Truth.
+
+## About
+
+Lituus Foundation is building infrastructure for truth that doesn't require trust. We support the development of decentralized oracle systems and prediction markets through strategic resource allocation and community empowerment.
+
+## Tech Stack
+
+- **Framework**: [Astro 5.16.4](https://astro.build) - Static site generation with zero JS by default
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com) - Utility-first CSS framework
+- **Deployment**: [Cloudflare Workers](https://workers.cloudflare.com) - Edge-first deployment
+- **Fonts**: Inter (sans-serif), Cormorant Garamond (serif)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or pnpm
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/lituus-foundation/lituus-foundation-website.git
+cd lituus-foundation-website
+
+# Install dependencies
+npm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### Development
 
-## 🚀 Project Structure
+```bash
+# Start development server at localhost:4321
+npm run dev
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+### Build
 
-```text
-/
-├── public/
+```bash
+# Build for production
+npm run build
+
+# Preview production build with Wrangler (Workers runtime)
+npm run preview
+```
+
+### Deployment
+
+```bash
+# Deploy to Cloudflare Workers
+npm run deploy
+
+# Generate Cloudflare type definitions
+npm run cf-typegen
+```
+
+## Project Structure
+
+```
+lituus-foundation-website/
+├── public/              # Static assets
+│   └── favicon.svg
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/      # Reusable Astro components
+│   ├── layouts/         # Page layouts
+│   ├── pages/           # File-based routing
+│   ├── styles/          # Global styles
+│   │   └── global.css
+│   └── env.d.ts         # TypeScript definitions
+├── astro.config.mjs     # Astro configuration
+├── tailwind.config.js   # Tailwind configuration
+├── tsconfig.json        # TypeScript configuration
+└── wrangler.jsonc       # Cloudflare Workers configuration
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Design Features
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- **Glassmorphism UI**: Subtle glass-panel effects with backdrop blur
+- **Animated Components**:
+  - Parallax scrolling hero section
+  - Rotating coil background animation
+  - Icon micro-interactions on hover
+- **Responsive Design**: Mobile-first approach with breakpoint optimization
+- **Accessibility**:
+  - Semantic HTML
+  - ARIA labels
+  - Reduced motion support
+  - Keyboard navigation
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Configuration
 
-## 🧞 Commands
+### Cloudflare Workers
 
-All commands are run from the root of the project, from a terminal:
+The project is configured for edge deployment via Cloudflare Workers:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- Static assets served via Workers Assets binding
+- Image optimization through Cloudflare Image Service
+- Platform proxy enabled for local development
 
-## 👀 Want to learn more?
+### TypeScript
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Strict mode enabled with full type safety across the codebase.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+[MIT License](LICENSE)
+
+## Links
+
+- **Website**: [lituus.foundation](https://lituus.foundation)
+- **Augur**: [augur.net](https://augur.net)
+- **Twitter**: [@LituusDAO](https://twitter.com/LituusDAO)
+- **Discord**: [Join our community](https://discord.gg/lituus)
+- **Telegram**: [Lituus Foundation](https://t.me/lituusfoundation)
+
+---
+
+Built with ♾️ by the Lituus Foundation team

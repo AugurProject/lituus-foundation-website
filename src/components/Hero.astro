@@ -1,0 +1,296 @@
+---
+import RotatingCoil from './RotatingCoil.astro';
+---
+
+<style>
+  /* Hero entrance animations */
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes line-expand {
+    from {
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+    to {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+
+  .hero-animate {
+    opacity: 0;
+  }
+
+  .hero-animate.animate {
+    animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .hero-label.animate {
+    animation-delay: 0.2s;
+  }
+
+  .hero-label-line {
+    transform: scaleX(0);
+  }
+
+  .hero-label-line.animate {
+    animation: line-expand 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.1s;
+  }
+
+  .hero-title-1.animate {
+    animation-delay: 0.4s;
+  }
+
+  .hero-title-2.animate {
+    animation-delay: 0.55s;
+  }
+
+  .hero-title-3.animate {
+    animation-delay: 0.7s;
+  }
+
+  .hero-description.animate {
+    animation-delay: 0.9s;
+  }
+
+  .hero-cta.animate {
+    animation-delay: 1.1s;
+  }
+
+  .hero-cta-secondary.animate {
+    animation-delay: 1.25s;
+  }
+
+  .hero-scroll {
+    opacity: 0;
+  }
+
+  .hero-scroll.animate {
+    animation: fade-in 1s ease-out forwards;
+    animation-delay: 1.6s;
+  }
+
+  .hero-coil {
+    opacity: 0;
+  }
+
+  .hero-coil.animate {
+    animation: fade-in 1.5s ease-out forwards;
+    animation-delay: 0.3s;
+  }
+
+  /* Parallax layers */
+  .hero-coil,
+  .hero-content,
+  .hero-scroll {
+    will-change: transform;
+  }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-animate,
+    .hero-label-line,
+    .hero-scroll,
+    .hero-coil {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .hero-coil,
+    .hero-content,
+    .hero-scroll {
+      will-change: auto;
+    }
+  }
+</style>
+
+<header id="hero" class="relative min-h-screen flex items-center pt-20">
+  <!-- Rotating Coil Overlay -->
+  <div class="absolute inset-x-0 flex items-center md:items-center hero-coil">
+    <div class="w-full max-w-4xl md:max-w-7xl mx-auto md:flex justify-end">
+      <RotatingCoil className="w-[180vw] md:max-w-3xl -mr-40 aspect-square" />
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 w-full relative z-10 grid grid-cols-1 md:grid-cols-12 gap-12 hero-content">
+    <div class="md:col-span-9 flex flex-col justify-center">
+      <!-- Label -->
+      <div class="flex items-center gap-4 mb-8">
+        <div class="w-12 h-px bg-lituus-pink hero-label-line"></div>
+        <span class="text-xs tracking-[0.2em] text-white uppercase hero-animate hero-label">
+          Lituus Foundation
+        </span>
+      </div>
+
+      <h1 class="text-6xl md:text-8xl font-light text-white mb-8 leading-[0.95] tracking-tight text-glow">
+        <span class="whitespace-nowrap hero-animate hero-title-1 block">Guardians of</span>
+        <span class="font-serif italic block opacity-80 text-lituus-pink hero-animate hero-title-2">
+          Decentralized
+        </span>
+        <span class="hero-animate hero-title-3 block">Truth</span>
+      </h1>
+
+      <p class="text-lg md:text-xl font-light text-slate-200 leading-relaxed max-w-xl mb-12 border-l border-lituus-pink/30 pl-6 hero-animate hero-description">
+        In an age of information chaos, we're building infrastructure for
+        truth that doesn't require trust.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-start gap-6">
+        <a href="#" class="px-8 py-3 bg-lituus-pink text-[#2c2c2c] rounded-sm font-medium text-sm tracking-widest hover:bg-[#e8c5d1] transition-colors uppercase hero-animate hero-cta">
+          Read Manifesto
+        </a>
+        <a href="#" class="px-8 py-3 border border-white/30 text-white rounded-sm font-medium text-sm tracking-widest hover:bg-white hover:text-[#2c2c2c] transition-all uppercase backdrop-blur-sm hero-animate hero-cta-secondary">
+          View Research
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-10 left-6 flex items-center gap-4 hero-scroll">
+    <div class="h-16 w-px bg-linear-to-b from-transparent via-lituus-pink to-transparent"></div>
+    <span class="text-[10px] uppercase tracking-widest text-slate-300 font-thin rotate-90 origin-left translate-y-2">
+      Scroll
+    </span>
+  </div>
+</header>
+
+<script>
+  function initHeroAnimations() {
+    const hero = document.querySelector('header.relative.min-h-screen');
+    if (!hero) return;
+
+    // Skip if already animated (prevents flicker on scroll back)
+    if (hero.hasAttribute('data-animated')) return;
+
+    const animatedElements = hero.querySelectorAll('.hero-animate, .hero-label-line, .hero-scroll, .hero-coil');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Mark as animated so we don't replay on scroll back
+            hero.setAttribute('data-animated', 'true');
+
+            // Trigger entrance animations once
+            animatedElements.forEach((el) => {
+              el.classList.add('animate');
+
+              // After animation completes, clear animation so JS can control opacity
+              el.addEventListener('animationend', () => {
+                const htmlEl = el as HTMLElement;
+                htmlEl.style.animation = 'none';
+                htmlEl.style.opacity = '1';
+                // Preserve final transform state for line-expand animation
+                if (el.classList.contains('hero-label-line')) {
+                  htmlEl.style.transform = 'scaleX(1)';
+                }
+              }, { once: true });
+            });
+
+            // Stop observing after first animation
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -10% 0px',
+      }
+    );
+
+    observer.observe(hero);
+  }
+
+  function initParallax() {
+    const hero = document.querySelector('header.relative.min-h-screen') as HTMLElement;
+    if (!hero) return;
+
+    const coil = hero.querySelector('.hero-coil') as HTMLElement;
+    const content = hero.querySelector('.hero-content') as HTMLElement;
+    const scrollIndicator = hero.querySelector('.hero-scroll') as HTMLElement;
+
+    // Check for reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let ticking = false;
+
+    function updateParallax() {
+      const scrollY = window.scrollY;
+      const heroHeight = hero.offsetHeight;
+
+      // Only apply parallax when hero is in view
+      if (scrollY < heroHeight) {
+        // Calculate fade-out opacity (starts fading at 20% scroll, fully faded at 60%)
+        const fadeStart = heroHeight * 0.2;
+        const fadeEnd = heroHeight * 0.6;
+        const opacity = Math.max(0, Math.min(1, 1 - (scrollY - fadeStart) / (fadeEnd - fadeStart)));
+
+        // Coil moves slower (0.3x scroll speed) - feels further back
+        if (coil) {
+          coil.style.transform = `translateY(${scrollY * 0.3}px)`;
+          coil.style.opacity = String(opacity);
+        }
+
+        // Content moves faster (0.6x scroll speed) - feels closer
+        if (content) {
+          content.style.transform = `translateY(${scrollY * 0.6}px)`;
+          content.style.opacity = String(opacity);
+        }
+
+        // Scroll indicator fades out faster
+        if (scrollIndicator) {
+          const scrollIndicatorOpacity = Math.max(0, 1 - scrollY / (heroHeight * 0.3));
+          scrollIndicator.style.transform = `translateY(${scrollY * 0.5}px)`;
+          scrollIndicator.style.opacity = String(scrollIndicatorOpacity);
+        }
+      }
+
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Cleanup on page transition
+    document.addEventListener('astro:before-swap', () => {
+      window.removeEventListener('scroll', onScroll);
+    }, { once: true });
+  }
+
+  // Run on initial load
+  initHeroAnimations();
+  initParallax();
+
+  // Re-run on Astro page transitions (View Transitions)
+  document.addEventListener('astro:page-load', () => {
+    initHeroAnimations();
+    initParallax();
+  });
+</script>
