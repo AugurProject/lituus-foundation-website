@@ -17,7 +17,7 @@ const a = 250; // The constant in r = a/√θ
 // We plot from small theta (outer tail) to larger theta (inner spiral)
 const thetaStart = 0.2; // Avoid θ=0 where r→∞
 const thetaEnd = 15; // Deep into the spiral
-const steps = 200; // Smooth curve
+const steps = 400; // Smooth curve
 
 // Generate the lituus curve: r = a/√θ
 const points: Array<{x: number, y: number, theta: number}> = [];
@@ -31,7 +31,7 @@ for (let i = 0; i <= steps; i++) {
 }
 
 // Break the curve into segments and calculate angle for each
-const segmentSize = 4; // How many points per segment
+const segmentSize = 8; // How many points per segment (optimized for performance)
 const segments: Array<{pathData: string, angleDeg: number, index: number}> = [];
 
 for (let i = 0; i < points.length - 1; i += segmentSize) {
@@ -166,6 +166,7 @@ for (let i = 0; i < oppositePoints.length - 1; i += segmentSize) {
   /* Each segment fades in with staggered delay, holds, then all fade out together */
   .animated-segment {
     stroke-opacity: 0;
+    will-change: opacity;
     animation: segment-draw 8s ease-out infinite;
     animation-delay: var(--appear-delay, 0s);
   }
@@ -194,6 +195,7 @@ for (let i = 0; i < oppositePoints.length - 1; i += segmentSize) {
   /* Opposite curve: same animation but offset to start after curve 1 */
   .animated-segment-opposite {
     stroke-opacity: 0;
+    will-change: opacity;
     animation: segment-draw 8s ease-out infinite;
     /* Add base delay (8s cycle offset) + individual segment delay */
     animation-delay: calc(4s + var(--appear-delay, 0s));
