@@ -20,7 +20,6 @@
     height: 100%;
     width: 200vw;
     background-repeat: repeat-x;
-    background-size: 100vw auto; /* Each tile = exactly viewport width for seamless loop */
     will-change: transform;
     transform: translateZ(0);
   }
@@ -38,7 +37,7 @@
 
 <div class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
   <!-- Cloud Layer 1 - Slow -->
-  <div class="fog-layer animate-fog-slow bg-[url('/images/cloud-2.webp')]"></div>
+  <div class="fog-layer animate-fog-slow bg-[url('/images/cloud-2.webp')] bg-bottom bg-contain"></div>
   <!-- Cloud Layer 3 - Medium -->
-  <div class="fog-layer animate-fog-fast bg-[url('/images/cloud-1.webp')]"></div>
+  <div class="fog-layer animate-fog-fast bg-[url('/images/cloud-1.webp')] bg-bottom bg-contain"></div>
 </div>
