@@ -24,7 +24,7 @@ Lituus Foundation is building infrastructure for truth that doesn't require trus
 
 ```bash
 # Clone the repository
-git clone https://github.com/lituus-foundation/lituus-foundation-website.git
+git clone https://github.com/AugurProject/lituus-foundation-website.git
 cd lituus-foundation-website
 
 # Install dependencies
@@ -117,9 +117,9 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 - **Website**: [lituus.foundation](https://lituus.foundation)
 - **Augur**: [augur.net](https://augur.net)
-- **Twitter**: [@LituusDAO](https://twitter.com/LituusDAO)
-- **Discord**: [Join our community](https://discord.gg/lituus)
-- **Telegram**: [Lituus Foundation](https://t.me/lituusfoundation)
+- **X (Twitter)**: [@AugurLituus](https://x.com/AugurLituus)
+- **Discord**: [Join our community](https://discord.gg/Y3tCZsSmz3)
+- **Telegram**: [Augur Lituus](https://t.me/augurlituus)
 
 ---
 
