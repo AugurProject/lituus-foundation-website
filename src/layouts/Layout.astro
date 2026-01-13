@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 
 interface Props {
   title?: string;
@@ -10,8 +11,6 @@ const {
   title = "Lituus Foundation - The Frontier of Decentralized Truth",
   description = "The foundation behind furtherthering Augur's oracle experimentation"
 } = Astro.props;
-
-import "../styles/global.css"
 ---
 
 <!doctype html>
@@ -42,11 +41,16 @@ import "../styles/global.css"
       rel="stylesheet"
     />
 
+    <!-- Google Analytics -->
+    <GoogleAnalytics gaId={import.meta.env.PUBLIC_GA_ID} />
+
     <!-- View Transitions Router -->
     <ClientRouter />
   </head>
-  <body class="relative min-h-screen text-slate-200 antialiased selection:bg-lituus-pink selection:text-[#2c2c2c] overflow-x-hidden">
-    <slot />
+  <body>
+    <div class="relative min-h-screen text-slate-200 antialiased selection:bg-lituus-pink selection:text-[#2c2c2c] overflow-x-hidden">
+      <slot />
+    </div>
     <script>
       // Scroll detection and navbar height measurement
       const navbar = document.querySelector('[data-navbar]') as HTMLElement;
@@ -77,3 +81,7 @@ import "../styles/global.css"
     </script>
   </body>
 </html>
+
+<style is:global>
+  @import "../styles/global.css";
+</style>
