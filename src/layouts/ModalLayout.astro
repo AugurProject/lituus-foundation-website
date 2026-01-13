@@ -1,0 +1,80 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<Layout title={title}>
+  <!-- Backdrop -->
+  <div class="fixed inset-0 bg-linear-to-br from-[#6b4a52] via-[#5a4159] to-[#4a3d4d] z-40" />
+
+  <!-- Modal container -->
+  <div class="fixed inset-0 flex items-center justify-center p-4 z-50 pointer-events-none">
+    <!-- Modal card that transitions from main content -->
+    <div class="modal-card bg-[#0d0d0d]/20 backdrop-blur-2xl border border-white/10 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-auto md:max-h-[85vh] pointer-events-auto">
+      <!-- Modal header -->
+      <div class="sticky top-0 bg-[#0d0d0d]/20 backdrop-blur-xl border-b border-white/5 px-6 md:px-8 py-4 flex justify-between items-center">
+        <h1 class="flex justify-center items-center gap-3 text-slate-100 font-bold text-2xl tracking-[4px] uppercase">
+          <span class="text-slate-500">[[</span> {title} <span class="text-slate-500">]]</span>
+        </h1>
+        <a
+          href="/"
+          class="text-slate-400 hover:text-lituus-pink transition-colors shrink-0 text-2xl leading-none"
+          aria-label="Close modal"
+        >
+          ✕
+        </a>
+      </div>
+
+      <!-- Modal content -->
+      <div class="px-6 md:px-8 py-8">
+        <slot />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Close modal on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        window.location.href = '/';
+      }
+    });
+
+    // Close modal on backdrop click
+    document.addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        window.location.href = '/';
+      }
+    });
+
+    // Prevent body scroll when modal is open
+    document.body.style.overflow = 'hidden';
+
+    // Re-enable scroll on page unload
+    window.addEventListener('beforeunload', () => {
+      document.body.style.overflow = '';
+    });
+  </script>
+
+  <style>
+    .modal-card {
+      animation: modalEnter 0.3s ease-out both;
+    }
+
+    @keyframes modalEnter {
+      from {
+        opacity: 0;
+        transform: scale(0.75);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</Layout>
