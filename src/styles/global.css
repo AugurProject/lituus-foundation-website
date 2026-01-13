@@ -100,3 +100,45 @@ html {
   from { opacity: 1; }
   to { opacity: 0; }
 }
+
+/* Prose - Policy & Terms Content */
+.prose {
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+
+  & p {
+      font-size: var(--text-sm);
+  }
+
+  & h2 {
+    font-size: 2rem;
+    letter-spacing: -0.02em;
+    text-align: center;
+    @apply my-4 italic;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  & ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-left: 1.5rem;
+  }
+
+  & section {
+    @apply bg-black/30 py-5 px-4;
+  }
+
+  & li {
+    list-style-type: disc;
+  }
+}
